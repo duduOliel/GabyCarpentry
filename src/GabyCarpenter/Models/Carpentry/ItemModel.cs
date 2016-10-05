@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace GabyCarpenter.Models.Carpentry
 {
     public class ItemModel
     {
-        
+        [Key, Column(Order=1), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
         [Required]
@@ -29,10 +30,10 @@ namespace GabyCarpenter.Models.Carpentry
 
         public int price { get; set; }
 
-        public ICollection<byte[]> images { get; set; }
+        public byte[] images { get; set; }
 
-        public ICollection<IPart> parts { get; set; }
+        public ICollection<Part> parts { get; set; }
 
-        public ICollection<String> tags { get; set; }
+        public ICollection<Tag> tags { get; set; }
     }
 }
