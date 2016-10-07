@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
-namespace Models.Carpentry
+namespace GabyCarpenter.Models.Carpentry.Parts
 {
-    public class Part
+    public abstract  class Part
     {
+       
         public int id { get; set; }
         public string partNumber { get; set; }
         public string provider { get; set; }
@@ -15,5 +17,7 @@ namespace Models.Carpentry
         [StringLength(200)]
         public string Description { get; set; }
 
+        [ScaffoldColumn(false)]
+        public bool isInvenory { get; set; }
     }
 }

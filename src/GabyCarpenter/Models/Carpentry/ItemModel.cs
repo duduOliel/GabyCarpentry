@@ -1,4 +1,4 @@
-﻿using Models.Carpentry;
+﻿using GabyCarpenter.Models.Carpentry.Parts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

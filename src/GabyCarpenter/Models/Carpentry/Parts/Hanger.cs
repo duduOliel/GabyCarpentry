@@ -5,15 +5,14 @@ using System.Threading.Tasks;
 
 namespace GabyCarpenter.Models.Carpentry.Parts
 {
-    public enum BoardWoodTye
+    public enum HangerMaterial
     {
-        Oak, Pine, Birch
+        Iron, Silver, Plastic, Wood
     }
 
-    public class BoardModel : WoodPart
+    public class Hanger : Part
     {
-        public BoardWoodTye woodType {get; set;}
-        
+        public HangerMaterial material { get; set; }
     }
 }
 
