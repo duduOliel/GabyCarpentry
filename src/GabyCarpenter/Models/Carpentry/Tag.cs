@@ -6,7 +6,7 @@ namespace GabyCarpenter.Models.Carpentry
     public class Tag
     {
         [Key, Column(Order = 1), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id { get; set; }
-        public string text { get; set; }
+        public int Id { get; set; }
+        public string Text { get; set; }
     }
 }

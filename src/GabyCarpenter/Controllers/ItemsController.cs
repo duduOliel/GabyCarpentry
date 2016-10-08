@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GabyCarpenter.Data;
 using GabyCarpenter.Models.Carpentry;
@@ -22,7 +19,7 @@ namespace GabyCarpenter.Controllers
         // GET: Items
         public async Task<IActionResult> Index()
         {
-            return View(await _context.items.ToListAsync());
+            return View(await _context.Items.ToListAsync());
         }
 
         // GET: Items/Details/5
@@ -33,7 +30,7 @@ namespace GabyCarpenter.Controllers
                 return NotFound();
             }
 
-            var itemModel = await _context.items.SingleOrDefaultAsync(m => m.id == id);
+            var itemModel = await _context.Items.SingleOrDefaultAsync(m => m.Id == id);
             if (itemModel == null)
             {
                 return NotFound();
@@ -72,7 +69,7 @@ namespace GabyCarpenter.Controllers
                 return NotFound();
             }
 
-            var itemModel = await _context.items.SingleOrDefaultAsync(m => m.id == id);
+            var itemModel = await _context.Items.SingleOrDefaultAsync(m => m.Id == id);
             if (itemModel == null)
             {
                 return NotFound();
@@ -87,7 +84,7 @@ namespace GabyCarpenter.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,color,depth,description,height,images,name,price,width")] ItemModel itemModel)
         {
-            if (id != itemModel.id)
+            if (id != itemModel.Id)
             {
                 return NotFound();
             }
@@ -101,7 +98,7 @@ namespace GabyCarpenter.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ItemModelExists(itemModel.id))
+                    if (!ItemModelExists(itemModel.Id))
                     {
                         return NotFound();
                     }
@@ -123,7 +120,7 @@ namespace GabyCarpenter.Controllers
                 return NotFound();
             }
 
-            var itemModel = await _context.items.SingleOrDefaultAsync(m => m.id == id);
+            var itemModel = await _context.Items.SingleOrDefaultAsync(m => m.Id == id);
             if (itemModel == null)
             {
                 return NotFound();
@@ -137,15 +134,15 @@ namespace GabyCarpenter.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var itemModel = await _context.items.SingleOrDefaultAsync(m => m.id == id);
-            _context.items.Remove(itemModel);
+            var itemModel = await _context.Items.SingleOrDefaultAsync(m => m.Id == id);
+            _context.Items.Remove(itemModel);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
         private bool ItemModelExists(int id)
         {
-            return _context.items.Any(e => e.id == id);
+            return _context.Items.Any(e => e.Id == id);
         }
     }
 }

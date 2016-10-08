@@ -3,37 +3,35 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GabyCarpenter.Models.Carpentry
 {
     public class ItemModel
     {
         [Key, Column(Order=1), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(100)]
-        public String name { get; set; }
+        public String Name { get; set; }
 
         [StringLength(600, ErrorMessage ="Description must be less than 600 charecters")]
-        public String description { get; set; }
+        public String Description { get; set; }
 
-        public float height { get; set; }
+        public float Height { get; set; }
 
-        public float width { get; set; }
+        public float Width { get; set; }
 
-        public float depth { get; set; }
+        public float Depth { get; set; }
 
-        public String color { get; set; }
+        public String Color { get; set; }
 
-        public int price { get; set; }
+        public int Price { get; set; }
 
-        public byte[] images { get; set; }
+        public byte[] Images { get; set; }
 
-        public ICollection<Part> parts { get; set; }
+        public virtual ICollection<Part> Parts { get; set; }
 
-        public ICollection<Tag> tags { get; set; }
+        public virtual ICollection<Tag> Tags { get; set; }
     }
 }

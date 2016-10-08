@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace GabyCarpenter.Models.Carpentry.Parts
+﻿namespace GabyCarpenter.Models.Carpentry.Parts
 {
     public enum HangerMaterial
     {
@@ -12,7 +7,7 @@ namespace GabyCarpenter.Models.Carpentry.Parts
 
     public class Hanger : Part
     {
-        public HangerMaterial material { get; set; }
+        public HangerMaterial Material { get; set; }
     }
 }
 

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace GabyCarpenter.Models.Carpentry.Parts
+﻿namespace GabyCarpenter.Models.Carpentry.Parts
 {
     public enum PlateMaterial
     {
-        Plywood, Solid, MDF
+        Plywood, Solid, Mdf
     }
-    public class Plate : WoodPart
+    public class Plate : Part
     {
-        public PlateMaterial MyProperty { get; set; }
+        public PlateMaterial PlateMaterial { get; set; }
     }
 }

@@ -1,10 +1,6 @@
 ﻿using GabyCarpenter.Models.Carpentry;
 using GabyCarpenter.Models.Carpentry.Parts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GabyCarpenter.Data
 {
@@ -26,7 +22,10 @@ namespace GabyCarpenter.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
       */  
-        public DbSet<Part> parts { get; set; }
-        public DbSet<ItemModel> items { get; set; }
+        public DbSet<Hanger> Hangers { get; set; }
+        //        public DbSet<Board> boards { get; set; }
+        public DbSet<Plate> Plates { get; set; }
+        public DbSet<Board> Boards { get; set; }
+        public DbSet<ItemModel> Items { get; set; }
     }
 }

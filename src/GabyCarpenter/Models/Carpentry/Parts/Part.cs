@@ -1,23 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GabyCarpenter.Models.Carpentry.Parts
 {
     public abstract  class Part
     {
-       
-        public int id { get; set; }
-        public string partNumber { get; set; }
-        public string provider { get; set; }
-        public int price { get; set; }
+        [Key, Column(Order = 1), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public string PartNumber { get; set; }
+        public string Provider { get; set; }
+        public int PartPrice { get; set; }
 
         [Display(Name = "amount in inventory")]
-        public int amountInInvetory { get; set; }
+        public int AmountInInvetory { get; set; }
 
         [StringLength(200)]
         public string Description { get; set; }
 
         [ScaffoldColumn(false)]
-        public bool isInvenory { get; set; }
+        public bool IsInvenory { get; set; }
+        public float Length { get; set; }
+        public float Width { get; set; }
+        public float Thickness { get; set; }
     }
 }
