@@ -1,4 +1,4 @@
-﻿using GabyCarpenter.Models.Carpentry.Parts;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,6 +8,12 @@ namespace GabyCarpenter.Models.Carpentry
 {
     public class ItemModel
     {
+        public ItemModel()
+        {
+            this.Tags = new List<Tag>();
+            this.Image = new List<SavedImage>();
+
+        }
         [Key, Column(Order=1), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
@@ -28,10 +34,12 @@ namespace GabyCarpenter.Models.Carpentry
 
         public int Price { get; set; }
 
-        public byte[] Images { get; set; }
+        public virtual ICollection<SavedImage> Image { get; set; }
 
-        public virtual ICollection<Part> Parts { get; set; }
+        public  ICollection<Tag> Tags { get; set; }
 
-        public virtual ICollection<Tag> Tags { get; set; }
+        public virtual Supplier supplier { get; set; }
+
+        public int amountInStock { get; set; }
     }
 }

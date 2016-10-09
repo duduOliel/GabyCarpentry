@@ -1,6 +1,9 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GabyCarpenter.Data;
 using GabyCarpenter.Models.Carpentry;
@@ -16,13 +19,13 @@ namespace GabyCarpenter.Controllers
             _context = context;    
         }
 
-        // GET: Items
+        // GET: ItemModels
         public async Task<IActionResult> Index()
         {
             return View(await _context.Items.ToListAsync());
         }
 
-        // GET: Items/Details/5
+        // GET: ItemModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,21 +42,22 @@ namespace GabyCarpenter.Controllers
             return View(itemModel);
         }
 
-        // GET: Items/Create
+        // GET: ItemModels/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Items/Create
+        // POST: ItemModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,color,depth,description,height,images,name,price,width")] ItemModel itemModel)
+        public async Task<IActionResult> Create([Bind("Id,Color,Depth,Description,Height,Name,Price,Width,amountInStock")] ItemModel itemModel, [Bind("tags")]string tags)
         {
             if (ModelState.IsValid)
             {
+                addTags(itemModel,tags);
                 _context.Add(itemModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -61,7 +65,21 @@ namespace GabyCarpenter.Controllers
             return View(itemModel);
         }
 
-        // GET: Items/Edit/5
+        private void addTags(ItemModel itemModel, string tags)
+        {
+            Array.ForEach<string>(tags.Split(','), t =>
+            {
+                Tag tag = _context.tags.FirstOrDefault(p => p.Text.Equals(t));
+                if (tag == null)
+                {
+                    tag = new Tag(t);
+                   // _context.Add(tag);
+                }
+                itemModel.Tags.Add(tag);
+            });
+        }
+
+        // GET: ItemModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,12 +95,12 @@ namespace GabyCarpenter.Controllers
             return View(itemModel);
         }
 
-        // POST: Items/Edit/5
+        // POST: ItemModels/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,color,depth,description,height,images,name,price,width")] ItemModel itemModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Color,Depth,Description,Height,Name,Price,Width,amountInStock")] ItemModel itemModel)
         {
             if (id != itemModel.Id)
             {
@@ -112,7 +130,7 @@ namespace GabyCarpenter.Controllers
             return View(itemModel);
         }
 
-        // GET: Items/Delete/5
+        // GET: ItemModels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -129,7 +147,7 @@ namespace GabyCarpenter.Controllers
             return View(itemModel);
         }
 
-        // POST: Items/Delete/5
+        // POST: ItemModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

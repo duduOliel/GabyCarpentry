@@ -25,9 +25,6 @@
                 @Html.DisplayNameFor(model => model.Height)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Images)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
@@ -35,6 +32,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Width)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.amountInStock)
             </th>
             <th></th>
         </tr>
@@ -55,9 +55,6 @@
                 @Html.DisplayFor(modelItem => item.Height)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Images)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
@@ -65,6 +62,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Width)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.amountInStock)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
