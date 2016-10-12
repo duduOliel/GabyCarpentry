@@ -109,7 +109,7 @@ namespace GabyCarpenter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Color,Depth,Description,Height,Name,Price,Width,amountInStock,tags")] ItemModel itemModel, string imageToDele)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Color,Depth,Description,Height,Name,Price,Width,amountInStock,tags")] ItemModel itemModel, string imageToDele, [Bind("Image")] ICollection<IFormFile> Image)
         {
             if (id != itemModel.Id)
             {
@@ -133,6 +133,7 @@ namespace GabyCarpenter.Controllers
                         }
 
                     }
+                    saveImages(itemModel, Image);
                     _context.Update(itemModel);
                     await _context.SaveChangesAsync();
                 }
