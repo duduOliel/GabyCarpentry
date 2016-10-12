@@ -55,20 +55,23 @@ namespace GabyCarpenter.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SavedImage",
+                name: "images",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    FileId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    FileName = table.Column<string>(nullable: true),
-                    ItemModelId = table.Column<int>(nullable: true)
+                    Content = table.Column<byte[]>(nullable: true),
+                    ContentType = table.Column<string>(maxLength: 100, nullable: true),
+                    FileName = table.Column<string>(maxLength: 255, nullable: true),
+                    PersonId = table.Column<int>(nullable: false),
+                    itemId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SavedImage", x => x.Id);
+                    table.PrimaryKey("PK_images", x => x.FileId);
                     table.ForeignKey(
-                        name: "FK_SavedImage_Items_ItemModelId",
-                        column: x => x.ItemModelId,
+                        name: "FK_images_Items_itemId",
+                        column: x => x.itemId,
                         principalTable: "Items",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -80,15 +83,15 @@ namespace GabyCarpenter.Migrations
                 column: "supplierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SavedImage_ItemModelId",
-                table: "SavedImage",
-                column: "ItemModelId");
+                name: "IX_images_itemId",
+                table: "images",
+                column: "itemId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "SavedImage");
+                name: "images");
 
             migrationBuilder.DropTable(
                 name: "Items");

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GabyCarpenter.Data;
 using GabyCarpenter.Models.Carpentry;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace GabyCarpenter.Controllers
 {
@@ -53,15 +55,37 @@ namespace GabyCarpenter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Color,Depth,Description,Height,Name,Price,Width,amountInStock,tags")] ItemModel itemModel)
+        public async Task<IActionResult> Create([Bind("Id,Color,Depth,Description,Height,Name,Price,Width,amountInStock,tags")] ItemModel itemModel,[Bind("Image")] ICollection<IFormFile> Image)
         {
             if (ModelState.IsValid)
             {
+                saveImages(itemModel, Image);
                 _context.Add(itemModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(itemModel);
+         }
+
+        private void saveImages(ItemModel itemModel, ICollection<IFormFile> files)
+        {
+            foreach (var file in files)
+            {
+                if (file.Length > 0)
+                {
+                    var savedImage = new SavedImage();
+                    savedImage.ContentType = file.ContentType;
+                    savedImage.FileName = file.Name;
+                    //var memStream = new MemoryStream();
+                    using (var memStream = new MemoryStream())
+                    {
+                        file.CopyTo(memStream);
+                        savedImage.Content = memStream.ToArray();
+                    }
+
+                    itemModel.Image.Add(savedImage);
+                }
+            }
         }
 
         // GET: Items/Edit/5

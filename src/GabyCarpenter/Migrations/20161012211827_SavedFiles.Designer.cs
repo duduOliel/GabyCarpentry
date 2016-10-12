@@ -8,8 +8,8 @@ using GabyCarpenter.Data;
 namespace GabyCarpenter.Migrations
 {
     [DbContext(typeof(GabyCarpenterContext))]
-    [Migration("20161012192230_initial")]
-    partial class initial
+    [Migration("20161012211827_SavedFiles")]
+    partial class SavedFiles
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,18 +54,24 @@ namespace GabyCarpenter.Migrations
 
             modelBuilder.Entity("GabyCarpenter.Models.Carpentry.SavedImage", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("FileId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("FileName");
+                    b.Property<byte[]>("Content");
 
-                    b.Property<int?>("ItemModelId");
+                    b.Property<string>("ContentType")
+                        .HasAnnotation("MaxLength", 100);
 
-                    b.HasKey("Id");
+                    b.Property<string>("FileName")
+                        .HasAnnotation("MaxLength", 255);
 
-                    b.HasIndex("ItemModelId");
+                    b.Property<int?>("itemId");
 
-                    b.ToTable("SavedImage");
+                    b.HasKey("FileId");
+
+                    b.HasIndex("itemId");
+
+                    b.ToTable("images");
                 });
 
             modelBuilder.Entity("GabyCarpenter.Models.Carpentry.Supplier", b =>
@@ -98,9 +104,9 @@ namespace GabyCarpenter.Migrations
 
             modelBuilder.Entity("GabyCarpenter.Models.Carpentry.SavedImage", b =>
                 {
-                    b.HasOne("GabyCarpenter.Models.Carpentry.ItemModel")
+                    b.HasOne("GabyCarpenter.Models.Carpentry.ItemModel", "item")
                         .WithMany("Image")
-                        .HasForeignKey("ItemModelId");
+                        .HasForeignKey("itemId");
                 });
         }
     }

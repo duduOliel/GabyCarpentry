@@ -8,9 +8,10 @@ using GabyCarpenter.Data;
 namespace GabyCarpenter.Migrations
 {
     [DbContext(typeof(GabyCarpenterContext))]
-    partial class GabyCarpenterContextModelSnapshot : ModelSnapshot
+    [Migration("20161012201541_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -63,6 +64,8 @@ namespace GabyCarpenter.Migrations
 
                     b.Property<string>("FileName")
                         .HasAnnotation("MaxLength", 255);
+
+                    b.Property<int>("PersonId");
 
                     b.Property<int?>("itemId");
 
