@@ -35,12 +35,12 @@ namespace GabyCarpenter.Controllers
                 return NotFound();
             }
 
-            var itemModel = await _context.Items.SingleOrDefaultAsync(m => m.Id == id);
+            var itemModel = await _context.Items.Include(i=>i.Image).SingleOrDefaultAsync(m => m.Id == id);
             if (itemModel == null)
             {
                 return NotFound();
             }
-
+            itemModel.Image.Count();
             return View(itemModel);
         }
 
@@ -96,7 +96,7 @@ namespace GabyCarpenter.Controllers
                 return NotFound();
             }
 
-            var itemModel = await _context.Items.SingleOrDefaultAsync(m => m.Id == id);
+            var itemModel = await _context.Items.Include(i=>i.Image).SingleOrDefaultAsync(m => m.Id == id);
             if (itemModel == null)
             {
                 return NotFound();
@@ -109,7 +109,7 @@ namespace GabyCarpenter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Color,Depth,Description,Height,Name,Price,Width,amountInStock,tags")] ItemModel itemModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Color,Depth,Description,Height,Name,Price,Width,amountInStock,tags")] ItemModel itemModel, string imageToDele)
         {
             if (id != itemModel.Id)
             {
@@ -120,6 +120,19 @@ namespace GabyCarpenter.Controllers
             {
                 try
                 {
+                    if (imageToDele != null && imageToDele != "")
+                    {
+                        foreach (string imageId in imageToDele.Split(','))
+                        {
+                            if (imageId != "")
+                            {
+                                var img = _context.images.FirstOrDefault(i => i.FileId == int.Parse(imageId));
+                                itemModel.Image.Remove(img);
+                                _context.images.Remove(img);
+                            }
+                        }
+
+                    }
                     _context.Update(itemModel);
                     await _context.SaveChangesAsync();
                 }
