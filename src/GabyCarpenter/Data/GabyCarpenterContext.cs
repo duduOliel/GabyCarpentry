@@ -15,9 +15,9 @@ namespace GabyCarpenter.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Tag>()
-                .HasMany<ItemModel>(i => i.ItemModels)
-                .with
+            //builder.Entity<Tag>()
+            //    .HasMany<ItemModel>(i => i.ItemModels)
+            //    .with
                 
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
@@ -26,6 +26,5 @@ namespace GabyCarpenter.Data
         }
         
         public DbSet<ItemModel> Items { get; set; }
-        public DbSet<Tag> tags { get; set; }
     }
 }
