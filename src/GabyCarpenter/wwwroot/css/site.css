@@ -1,4 +1,43 @@
-﻿body {
+﻿header, footer, section, aside, nav, article {
+	display: block;
+}
+aside section {
+	margin: 22px 0 0 22px;
+	padding: 11px 22px;
+    /*Dudu: added gradiant to the side bar, left image for non supporting browsers*/
+	background: url("images/sidebar_section_background.png") repeat-x;
+    background: -webkit-linear-gradient(rgb(210,210,210), #ebebeb); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgb(210,210,210), #ebebeb); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgb(210,210,210), #ebebeb); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgb(210,210,210), #ebebeb); /* Standard syntax */
+	
+	/* Border-radius not implemented yet */
+	-moz-border-radius: 11px;
+	-webkit-border-radius: 11px;
+}
+
+	aside section ul {
+		margin: 0 0 0 22px;
+		list-style: none;
+	}
+	
+		aside section ul li a {
+			display: block;
+			text-decoration: none;
+			color: #000;
+		}
+		
+			aside section ul li a:hover {
+				text-decoration: underline;
+			}
+aside {
+		display: table-cell;
+		width: 300px;
+		background: url("../images/sidebar_background.png") top left;
+	}
+
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }

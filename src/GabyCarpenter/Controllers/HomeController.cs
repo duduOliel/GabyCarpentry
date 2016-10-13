@@ -1,12 +1,39 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GabyCarpenter.Data;
+using GabyCarpenter.Models.Carpentry.viewModel;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
 
 namespace GabyCarpenter.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+
+        private readonly GabyCarpenterContext _context;
+
+        public HomeController(GabyCarpenterContext context)
         {
-            return View();
+            _context = context;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            Random rand = new Random();
+
+            HomeViewModel homeViewModel = new HomeViewModel();
+
+            var items = await _context.Items.Include(i => i.Image).ToArrayAsync();
+            while (homeViewModel.ItemsForCarousel.Count < (4 < items.Length ? 4 : items.Length))
+            {
+                var index = rand.Next(items.Length);
+                if (!homeViewModel.ItemsForCarousel.Contains(items[index]))
+                {
+                    homeViewModel.ItemsForCarousel.Add(items[index]);
+                }
+            }
+
+            return View(homeViewModel);
         }
 
         public IActionResult About()
