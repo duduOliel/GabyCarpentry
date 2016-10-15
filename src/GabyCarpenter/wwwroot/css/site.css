@@ -1,45 +1,44 @@
-﻿header, footer, section, aside, nav, article {
-	display: block;
-}
-aside section {
-	margin: 22px 0 0 22px;
-	padding: 11px 22px;
-    /*Dudu: added gradiant to the side bar, left image for non supporting browsers*/
-	background: url("images/sidebar_section_background.png") repeat-x;
-    background: -webkit-linear-gradient(rgb(210,210,210), #ebebeb); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(rgb(210,210,210), #ebebeb); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(rgb(210,210,210), #ebebeb); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(rgb(210,210,210), #ebebeb); /* Standard syntax */
-	
-	/* Border-radius not implemented yet */
-	-moz-border-radius: 11px;
-	-webkit-border-radius: 11px;
+﻿
+header {
+    #position:relative;
+    #top:50px;
+    margin-top:55px;
 }
 
-	aside section ul {
-		margin: 0 0 0 22px;
-		list-style: none;
-	}
-	
-		aside section ul li a {
-			display: block;
-			text-decoration: none;
-			color: #000;
-		}
-		
-			aside section ul li a:hover {
-				text-decoration: underline;
-			}
+div#content {
+    
+    background-color:red;
+    position:relative;
+    #   width:80%;
+}
 aside {
-		display: table-cell;
-		width: 300px;
-		background: url("../images/sidebar_background.png") top left;
-	}
+    position: absolute;
+    top:0px;
+    width:19.5%;
+    height:300px;
+    right:0;
+    margin-left:8px;
+    
+    border-radius:8px 8px;
 
+    background: -webkit-linear-gradient(#80c1ff, #ebebeb); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#80c1ff, #ebebeb); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#80c1ff, #ebebeb); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#80c1ff, #ebebeb); /* Standard syntax */
+    
+}
 
-body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+div#content > section{
+    background-color:blue;
+    width: 80%;
+    margin-bottom:10px;
+    margin-top:10px;
+    
+}
+
+section { 
+    padding:10px;
+    border-radius:8px 8px;
 }
 
 /* Wrapping element */

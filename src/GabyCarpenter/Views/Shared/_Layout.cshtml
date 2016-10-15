@@ -8,6 +8,7 @@
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <script src="~/lib/jquery/dist/jquery.js"></script>
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -40,11 +41,38 @@
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2016 - GabyCarpenter</p>
-        </footer>
+        <header>
+            @RenderSection("header", required:false)
+        </header>
+        <div id="content">
+            @RenderBody()
+            <aside id="aside">
+                @if (IsSectionDefined("aside"))
+                {
+                    @RenderSection("aside", required: true);
+                }
+                else
+                {
+                    <section>
+                        <h3> For assistance, Please contact Dudu Oliel</h3>
+                        <p>Tel: +972-52-4437411</p>
+                        <p>Email: <a href="mailto:oliel@yahoo.com" target="_top">oliel@yahoo.com</a></p>
+                    </section>
+
+                }
+            </aside>
+        </div>
+      
+        <script>
+            $(document).ready(function () {
+                $(aside).height($(content).height());
+            });
+        </script>
+
+            <hr />
+            <footer>
+                <p>&copy; 2016 - GabyCarpenter</p>
+            </footer>
     </div>
 
     <environment names="Development">
