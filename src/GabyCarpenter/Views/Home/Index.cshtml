@@ -4,24 +4,39 @@
 }
 
 @section header{
-    <h1>This is the header</h1>
+    <h1>Gaby Carpentiry - Beatufull furniture</h1>
 }
 
    
-    <section>
-        <h1>
-         in section1</h1>
-        content in section
-        <p>peragraph in section</p>
-    </section>
-    <section>
-        <h1>
-            in section2
-        </h1>
-        content in section
-        <p>peragraph in section</p>
-    </section>
-    @section aside
+<section>
+    <div id="intro">
+        <h2> Welcome to Gaby carpentry shop</h2>
+        <p>In Gaby carpentry we provide the most beautifull ferniture for your Shaby Chic home</p>
+        <p>All our products are build or restored by hand, by out telented carpenter Gabriela</p>
+    </div>
+</section>
+
+<section>
+    <h2>Plase select an Item to order</h2>
+    <div class="row">
+        <form asp-action="Search" class="form-inline">
+            <div>
+                <div class="form-group col-xs-3">
+                    <label asp-for="tags" class="control-label"></label>
+                    <select asp-for="tags" class="selectpicker" asp-items="@(new SelectList(Model.tags))"></select>
+                    @*<span asp-validation-for="tags" class="text-danger" />*@
+                </div>
+                <div class="form-group col-xs-3">
+                    <label asp-for="colors" class="control-label"></label>
+                    <select asp-for="colors" class="selectpicker" asp-items="@(new SelectList(Model.colors))" data-width="200px"></select>
+                    @*<span asp-validation-for="colors" class="text-danger" />*@
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+    
+@section aside
     {
         <section>section in asside</section>
             this is aside

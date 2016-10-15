@@ -3,6 +3,7 @@ using GabyCarpenter.Models.Carpentry.viewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GabyCarpenter.Controllers
@@ -32,6 +33,9 @@ namespace GabyCarpenter.Controllers
                     homeViewModel.ItemsForCarousel.Add(items[index]);
                 }
             }
+
+            homeViewModel.tags = _context.Items.SelectMany(m => m.tags.Split(',')).Distinct().ToList();
+            homeViewModel.colors = _context.Items.Select(m => m.Color).Distinct().ToList();
 
             return View(homeViewModel);
         }

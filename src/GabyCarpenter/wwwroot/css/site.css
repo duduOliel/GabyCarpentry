@@ -1,4 +1,14 @@
-﻿
+﻿@font-face {
+   font-family: woodFont;
+   src: url(../fonts/MISTV___.TTF);
+}
+header h1 {
+     font-family: woodFont;
+    text-shadow:5px 5px 2px #808080;
+}
+h2{
+    font-family:fantasy;
+}
 header {
     #position:relative;
     #top:50px;
@@ -6,8 +16,6 @@ header {
 }
 
 div#content {
-    
-    background-color:red;
     position:relative;
     #   width:80%;
 }
@@ -33,13 +41,18 @@ div#content > section{
     width: 80%;
     margin-bottom:10px;
     margin-top:10px;
-    
+
+    background: -webkit-linear-gradient(#4faff7, #ebebeb); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#4faff7, #ebebeb); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#4faff7, #ebebeb); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#4faff7, #ebebeb); /* Standard syntax */
 }
 
 section { 
     padding:10px;
     border-radius:8px 8px;
 }
+
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
@@ -50,7 +63,6 @@ section {
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input,
-select,
 textarea {
     max-width: 280px;
 }
