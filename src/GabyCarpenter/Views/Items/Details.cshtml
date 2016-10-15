@@ -4,79 +4,85 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+@section header
+{
+    <h1>Details</h1>
+}
 
-<div>
-    @*<h4>ItemModel</h4>*@
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Color)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Color)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Height)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Height)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Width)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Width)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Depth)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Depth)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.amountInStock)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.amountInStock)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.tags)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.tags)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dt>
-            @foreach (var image in Model.Image)
+<section>
+    <div>
+        @*<h4>ItemModel</h4>*@
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Color)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Color)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Height)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Height)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Width)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Width)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Depth)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Depth)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.amountInStock)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.amountInStock)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.tags)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.tags)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Image)
+            </dt>
+            <dt>
+                @foreach (var image in Model.Image)
             {
-                <img src="~/SavedImages?id=@image.FileId" atl="picture" class="detailsImageThambnail"/>
-            }
-        </dt>
-    </dl>
-</div>
-<br />
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+                    <img src="~/SavedImages?id=@image.FileId" atl="picture" class="detailsImageThambnail" />
+                }
+            </dt>
+        </dl>
+    </div>
+    <br />
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+</section>
