@@ -11,7 +11,7 @@ $(document).ready(function () {
     // bind to the selects change event 
     $('#tags').change(function () { $("#searchForm").ajaxSubmit(options); });
     $('#colors').change(function () { $("#searchForm").ajaxSubmit(options); });
-    $('#PriceRange').change(function () { $("#searchForm").ajaxSubmit(options); });
+    $('#inStock').change(function () { $("#searchForm").ajaxSubmit(options); });
 });
 
 // post-submit callback 
@@ -20,7 +20,16 @@ function showResponse(json, statusText, xhr, $form) {
     $("[id^=item_]").hide();
 
     // display those returned from search
-    for (var id in json) {
+    json.items.forEach(function(id){
         $("#item_" + id).show();
-    }
+    });
+
+    // EmptyColorsFilter
+    //$("#colors").empty();
+    //$.each(json.colors, function (value) {
+    //    $('#colors')
+    //        .append($("<option></option>")
+    //                   .text(value));
+    //});
+
 }

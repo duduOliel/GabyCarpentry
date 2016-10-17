@@ -37,9 +37,9 @@ namespace GabyCarpenter.Controllers
 
             homeViewModel.tags = _context.Items.SelectMany(m => m.tags.Split(',')).Distinct().ToList();
             homeViewModel.colors = _context.Items.Select(m => m.Color).Distinct().ToList();
-            homeViewModel.PriceRange = new List<string>
+            homeViewModel.inStock = new List<string>
             {
-                "0 - 300", "301 - 700", "701 - 1000", "above 1000"
+                "yes", "no"
             };
 
             homeViewModel.filteredtems = _context.Items.ToList();
@@ -48,9 +48,15 @@ namespace GabyCarpenter.Controllers
         }
 
 
-        public IActionResult Search()
+        public IActionResult Search(ICollection<string> tags, ICollection<string> colors, ICollection<string> inStock)
         {
-            return Json(new int[] { 3, 1, 3 });
+            var matchingFilter = _context.Items.Include(m => m.Image)
+                .Where(c => colors.Contains(c.Color))
+                .Where(s => (inStock.Contains("yes") && s.amountInStock > 0) || (inStock.Contains("no") && s.amountInStock == 0))
+                .ToList()
+                .Where(i => i.tags.ToString().Split(',').Intersect(tags).Any());
+
+            return Json(new { items = matchingFilter.Select(q => q.Id).ToArray() , colors = matchingFilter.Select(m=>m.Color).ToArray()});
         }
 
         public IActionResult About()
