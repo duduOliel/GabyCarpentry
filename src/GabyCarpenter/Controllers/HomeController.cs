@@ -3,6 +3,7 @@ using GabyCarpenter.Models.Carpentry.viewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,8 +37,20 @@ namespace GabyCarpenter.Controllers
 
             homeViewModel.tags = _context.Items.SelectMany(m => m.tags.Split(',')).Distinct().ToList();
             homeViewModel.colors = _context.Items.Select(m => m.Color).Distinct().ToList();
+            homeViewModel.PriceRange = new List<string>
+            {
+                "0 - 300", "301 - 700", "701 - 1000", "above 1000"
+            };
+
+            homeViewModel.filteredtems = _context.Items.ToList();
 
             return View(homeViewModel);
+        }
+
+
+        public IActionResult Search()
+        {
+            return Json(new int[] { 3, 1, 3 });
         }
 
         public IActionResult About()

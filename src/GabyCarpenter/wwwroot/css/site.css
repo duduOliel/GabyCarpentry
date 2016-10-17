@@ -104,6 +104,11 @@ img.detailsImageThambnail{
     width : 40px;
 }
 
+img.filteredImageFixedSize{
+    height: 120px;
+    width: 120px;
+}
+
 div.editImage{
     float:left;
     position:relative;

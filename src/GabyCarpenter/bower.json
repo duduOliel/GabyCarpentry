@@ -5,7 +5,8 @@
     "bootstrap": "3.3.6",
     "jquery-validation-unobtrusive": "3.2.6",
     "bootstrap-tagsinput": "0.8.0",
-    "jquery": "2.2.3"
+    "jquery": "2.2.3",
+    "jquery-form": "3.46.0"
   },
   "resolutions": {
     "jquery": ">= 1.7.2"
