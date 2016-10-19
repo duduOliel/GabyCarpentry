@@ -20,7 +20,7 @@
     <h2>Plase select an Item to order</h2>
     <div class="row">
         <form id="searchForm" asp-action="Search" class="form-inline">
-            <div>
+            <div id="filters">
                 <div class="form-group col-xs-3">
                     <label asp-for="tags" class="control-label"></label>
                     <select asp-for="tags" class="selectpicker" asp-items="@(new SelectList(Model.tags))" ></select>
@@ -35,6 +35,9 @@
                     <label asp-for="inStock" class="control-label"></label>
                     <select asp-for="inStock" class="selectpicker" asp-items="@(new SelectList(Model.inStock))" data-width="200px" ></select>
                     @*<span asp-validation-for="inStock" class="text-danger" />*@
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-info" id="clearFilter">clearFilter</button>
                 </div>
             </div>
         </form>

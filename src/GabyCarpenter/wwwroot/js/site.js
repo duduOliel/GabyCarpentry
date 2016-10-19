@@ -12,6 +12,8 @@ $(document).ready(function () {
     $('#tags').change(function () { $("#searchForm").ajaxSubmit(options); });
     $('#colors').change(function () { $("#searchForm").ajaxSubmit(options); });
     $('#inStock').change(function () { $("#searchForm").ajaxSubmit(options); });
+    
+    $('#clearFilter').click(function () { $("#tags").val([]); $("#colors").val([]);$("#inStock").val(["yes","no"]);$("#searchForm").ajaxSubmit(options); });
 });
 
 // post-submit callback 
@@ -25,11 +27,19 @@ function showResponse(json, statusText, xhr, $form) {
     });
 
     // EmptyColorsFilter
-    //$("#colors").empty();
-    //$.each(json.colors, function (value) {
-    //    $('#colors')
-    //        .append($("<option></option>")
-    //                   .text(value));
-    //});
+    $("#colors").empty();
+    $.each(json.colors, function (index, value) {
+        $('#colors')
+            .append($("<option></option>")
+                       .text(value).selected(true));
+    });
+
+    // EmptyTagsFilter
+    $("#tags").empty();
+    $.each(json.tags, function (index, value) {
+        $('#tags')
+            .append($("<option></option>")
+                       .text(value).selected(true));
+    });
 
 }

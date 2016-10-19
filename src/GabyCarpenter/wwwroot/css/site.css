@@ -105,8 +105,8 @@ img.detailsImageThambnail{
 }
 
 img.filteredImageFixedSize{
-    height: 120px;
-    width: 120px;
+    height: 120px !important;
+    width: 120px !important;
 }
 
 div.editImage{
@@ -138,4 +138,8 @@ div.editImage img.deleteButton{
 div.editImage:hover img.deleteButton{
     display:block;
     opacity:inherit;
+}
+
+#filters select{
+    width:200px;
 }

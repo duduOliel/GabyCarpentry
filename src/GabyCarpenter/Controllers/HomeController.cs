@@ -35,7 +35,7 @@ namespace GabyCarpenter.Controllers
                 }
             }
 
-            homeViewModel.tags = _context.Items.SelectMany(m => m.tags.Split(',')).Distinct().ToList();
+            homeViewModel.tags = _context.Items.SelectMany(m => m.tags!=null ? m.tags.Split(','):new string[0]).Distinct().ToList();
             homeViewModel.colors = _context.Items.Select(m => m.Color).Distinct().ToList();
             homeViewModel.inStock = new List<string>
             {
@@ -51,12 +51,12 @@ namespace GabyCarpenter.Controllers
         public IActionResult Search(ICollection<string> tags, ICollection<string> colors, ICollection<string> inStock)
         {
             var matchingFilter = _context.Items.Include(m => m.Image)
-                .Where(c => colors.Contains(c.Color))
+                .Where(c => colors.Count == 0 || colors.Contains(c.Color))
                 .Where(s => (inStock.Contains("yes") && s.amountInStock > 0) || (inStock.Contains("no") && s.amountInStock == 0))
                 .ToList()
-                .Where(i => i.tags.ToString().Split(',').Intersect(tags).Any());
+                .Where(i => tags.Count == 0 || i.tags.ToString().Split(',').Intersect(tags).Any());
 
-            return Json(new { items = matchingFilter.Select(q => q.Id).ToArray() , colors = matchingFilter.Select(m=>m.Color).ToArray()});
+            return Json(new { items = matchingFilter.Select(q => q.Id).ToArray() , colors = matchingFilter.Select(m=>m.Color).ToArray(), tags = matchingFilter.SelectMany(m => m.tags.Split(',')).Distinct().ToArray() });
         }
 
         public IActionResult About()
