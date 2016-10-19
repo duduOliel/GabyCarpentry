@@ -56,7 +56,7 @@ namespace GabyCarpenter.Controllers
                 .ToList()
                 .Where(i => tags.Count == 0 || i.tags.ToString().Split(',').Intersect(tags).Any());
 
-            return Json(new { items = matchingFilter.Select(q => q.Id).ToArray() , colors = matchingFilter.Select(m=>m.Color).ToArray(), tags = matchingFilter.SelectMany(m => m.tags.Split(',')).Distinct().ToArray() });
+            return Json(new { items = matchingFilter.Select(q => q.Id).ToArray() , colors = matchingFilter.Select(m=>m.Color).Distinct().ToArray(), tags = matchingFilter.SelectMany(m => m.tags.Split(',')).Distinct().ToArray() });
         }
 
         public IActionResult About()

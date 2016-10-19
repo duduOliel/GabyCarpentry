@@ -43,7 +43,7 @@ namespace GabyCarpenter.Data
                     Color = "Pink",
                     Price = 1400,
                     amountInStock = 1,
-                    tags = "Kids,Books,Ggirls",
+                    tags = "Kids,Books,Girls",
                     Image = createImage("004.jpg", "005.jpg", "2626.jpg", "2628.jpg", "2629.jpg")
                 });
 
