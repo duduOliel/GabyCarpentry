@@ -27,5 +27,6 @@ namespace GabyCarpenter.Data
         
         public DbSet<ItemModel> Items { get; set; }
         public DbSet<SavedImage> images { get; set; }
+        public DbSet<OrderModel> Orders { get; set; }
     }
 }

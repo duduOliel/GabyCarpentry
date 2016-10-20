@@ -8,9 +8,10 @@ using GabyCarpenter.Data;
 namespace GabyCarpenter.Migrations
 {
     [DbContext(typeof(GabyCarpenterContext))]
-    partial class GabyCarpenterContextModelSnapshot : ModelSnapshot
+    [Migration("20161020211107_orders")]
+    partial class orders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")

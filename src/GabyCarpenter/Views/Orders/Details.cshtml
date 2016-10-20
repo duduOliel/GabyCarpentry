@@ -1,0 +1,43 @@
+@model GabyCarpenter.Models.Carpentry.OrderModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<section>
+    <h2>Order Details</h2>
+    <h4>Thank you for you order, we will contact you soon to complete payment issue</h4>
+    <div>
+        @{await Html.RenderPartialAsync("FilteredItemView", Model.orderdItem);}
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.clientName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.clientName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.phoneNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.phoneNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.SheepingAddress)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SheepingAddress)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.status)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.status)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> 
+    </div>
+</section>

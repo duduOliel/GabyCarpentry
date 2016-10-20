@@ -50,6 +50,7 @@
         {
             <div class="col-xs-4" id="item_@item.Id">
                 @{await Html.RenderPartialAsync("FilteredItemView", item);}
+                <p>@Html.ActionLink("Order This", "create", "Orders", new { id = item.Id }, null)</p>
             </div>
         }
     </div>
