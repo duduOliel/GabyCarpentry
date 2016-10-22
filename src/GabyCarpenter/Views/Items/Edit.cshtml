@@ -84,7 +84,7 @@
                     <select asp-for="supplier" class="form-control" asp-items="ViewBag.suppliers" ></select>
                     <span asp-validation-for="Image" class="text-danger" />
                     <script>
-                        $('#supplier option[value="2"]')[0].selected=true
+                        $('#supplier option[value="@Model.supplier.Id"]')[0].selected=true
                     </script>
                 </div>
             </div>

@@ -17,6 +17,38 @@ namespace GabyCarpenter.Data
         {
             var db = (GabyCarpenterContext)app.ApplicationServices.GetService(typeof(GabyCarpenterContext));
             
+            if(db.Supplier.FirstOrDefault(m => m.Name == "Maman") == null)
+            {
+                db.Supplier.Add(new Supplier()
+                {
+                    Name = "Maman",
+                    Address = "Rehovot",
+                    ContactPersonName="Yossi Maman",
+                    Email = "yossi@maman.co.il",
+                    PhoneNmber = "08-2236412"
+                });
+
+                db.Supplier.Add(new Supplier()
+                {
+                    Name = "Israely Wood Center",
+                    Address = "Bilu center",
+                    ContactPersonName = "Moshe",
+                    Email = "moshe@iwc.co.il",
+                    PhoneNmber = "08-8569543"
+                });
+
+                db.Supplier.Add(new Supplier()
+                {
+                    Name = "Tzdaka",
+                    Address = "Rehovot",
+                    ContactPersonName = "Yaakov Tzadka",
+                    Email = "",
+                    PhoneNmber = "08-9693145"
+                });
+            }
+
+            db.SaveChanges();
+
             if (db.Items.FirstOrDefault(m => m.Name == "Pink Shelf") == null)
             {
                 db.Items.Add(new Models.Carpentry.ItemModel()
@@ -30,7 +62,8 @@ namespace GabyCarpenter.Data
                     Price = 750,
                     amountInStock = 3,
                     tags = "Kitchen,Hangers,Shelf",
-                    Image = createImage("001.jpg", "002.jpg", "003.jpg")
+                    Image = createImage("001.jpg", "002.jpg", "003.jpg"),
+                    supplier = db.Supplier.FirstOrDefault(m=>m.Name== "Maman")
                 });
 
                 db.Items.Add(new Models.Carpentry.ItemModel()
@@ -44,7 +77,8 @@ namespace GabyCarpenter.Data
                     Price = 1400,
                     amountInStock = 1,
                     tags = "Kids,Books,Girls",
-                    Image = createImage("004.jpg", "005.jpg", "2626.jpg", "2628.jpg", "2629.jpg")
+                    Image = createImage("004.jpg", "005.jpg", "2626.jpg", "2628.jpg", "2629.jpg"),
+                    supplier = db.Supplier.FirstOrDefault(m => m.Name == "Maman")
                 });
 
                 db.Items.Add(new Models.Carpentry.ItemModel()
@@ -58,7 +92,8 @@ namespace GabyCarpenter.Data
                     Price = 350,
                     amountInStock = 10,
                     tags = "Hangers,shelf,small",
-                    Image = createImage("013.jpg", "018.jpg", "019.jpg")
+                    Image = createImage("013.jpg", "018.jpg", "019.jpg"),
+                    supplier = db.Supplier.FirstOrDefault(m => m.Name == "Maman")
                 });
 
                 db.Items.Add(new Models.Carpentry.ItemModel()
@@ -72,7 +107,8 @@ namespace GabyCarpenter.Data
                     Price = 1800,
                     amountInStock = 0,
                     tags = "Kids,Boys,Girls,Utility",
-                    Image = createImage("028.jpg", "038.jpg", "040.jpg")
+                    Image = createImage("028.jpg", "038.jpg", "040.jpg"),
+                    supplier = db.Supplier.FirstOrDefault(m => m.Name == "Israely Wood Center")
                 });
 
                 db.Items.Add(new Models.Carpentry.ItemModel()
@@ -86,7 +122,8 @@ namespace GabyCarpenter.Data
                     Price = 1200,
                     amountInStock = 0,
                     tags = "Kitchen,Shelf,Hearts",
-                    Image = createImage("2020.jpg", "2021.jpg")
+                    Image = createImage("2020.jpg", "2021.jpg"),
+                    supplier = db.Supplier.FirstOrDefault(m => m.Name == "Israely Wood Center")
                 });
 
                 db.Items.Add(new Models.Carpentry.ItemModel()
@@ -100,7 +137,8 @@ namespace GabyCarpenter.Data
                     Price = 900,
                     amountInStock = 4,
                     tags = "Living Room,Shelf,Deco",
-                    Image = createImage("2219.jpg", "2226.jpg", "IMG_2782.jpg", "IMG_2783.jpg")
+                    Image = createImage("2219.jpg", "2226.jpg", "IMG_2782.jpg", "IMG_2783.jpg"),
+                    supplier = db.Supplier.FirstOrDefault(m => m.Name == "Israely Wood Center")
                 });
 
                 db.Items.Add(new Models.Carpentry.ItemModel()
@@ -114,7 +152,8 @@ namespace GabyCarpenter.Data
                     Price = 2500,
                     amountInStock = 1,
                     tags = "Storage,Drawers",
-                    Image = createImage("2234.jpg", "2235.jpg")
+                    Image = createImage("2234.jpg", "2235.jpg"),
+                    supplier = db.Supplier.FirstOrDefault(m => m.Name == "Israely Wood Center")
                 });
 
                 db.Items.Add(new Models.Carpentry.ItemModel()
@@ -128,7 +167,8 @@ namespace GabyCarpenter.Data
                     Price = 2500,
                     amountInStock = 1,
                     tags = "Storage,Drawers",
-                    Image = createImage("2234.jpg", "2235.jpg")
+                    Image = createImage("2234.jpg", "2235.jpg"),
+                    supplier = db.Supplier.FirstOrDefault(m => m.Name == "Israely Wood Center")
                 });
 
                 db.Items.Add(new Models.Carpentry.ItemModel()
@@ -142,7 +182,8 @@ namespace GabyCarpenter.Data
                     Price = 3800,
                     amountInStock = 0,
                     tags = "Comparment,Storage,door",
-                    Image = createImage("2826.jpg", "2826.jpg", "2829.jpg")
+                    Image = createImage("2826.jpg", "2826.jpg", "2829.jpg"),
+                    supplier = db.Supplier.FirstOrDefault(m => m.Name == "Tzdaka")
                 });
 
                 db.Items.Add(new Models.Carpentry.ItemModel()
@@ -156,7 +197,8 @@ namespace GabyCarpenter.Data
                     Price = 2500,
                     amountInStock = 8,
                     tags = "books,caption,deco",
-                    Image = createImage("IMG_2767.jpg", "IMG_2775.jpg")
+                    Image = createImage("IMG_2767.jpg", "IMG_2775.jpg"),
+                    supplier = db.Supplier.FirstOrDefault(m => m.Name == "Tzdaka")
                 });
 
                 db.Items.Add(new Models.Carpentry.ItemModel()
@@ -170,7 +212,8 @@ namespace GabyCarpenter.Data
                     Price = 3600,
                     amountInStock = 1,
                     tags = "Kids,Cabinte,Heart,Girls",
-                    Image = createImage("IMG_2791.jpg", "IMG_2793.jpg", "IMG_2794.jpg")
+                    Image = createImage("IMG_2791.jpg", "IMG_2793.jpg", "IMG_2794.jpg"),
+                    supplier = db.Supplier.FirstOrDefault(m => m.Name == "Tzdaka")
                 });
 
                 db.Items.Add(new Models.Carpentry.ItemModel()
@@ -184,7 +227,8 @@ namespace GabyCarpenter.Data
                     Price = 3600,
                     amountInStock = 1,
                     tags = "Kids,Cabinte,Car,Boys",
-                    Image = createImage("IMG_2795.jpg", "IMG_2796.jpg")
+                    Image = createImage("IMG_2795.jpg", "IMG_2796.jpg"),
+                    supplier = db.Supplier.FirstOrDefault(m => m.Name == "Tzdaka")
                 });
             }
             //db.ChangeTracker.Entries<ItemModel>()
