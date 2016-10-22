@@ -35,7 +35,7 @@ namespace GabyCarpenter.Controllers
                 return NotFound();
             }
 
-            var itemModel = await _context.Items.Include(i=>i.Image).SingleOrDefaultAsync(m => m.Id == id);
+            var itemModel = await _context.Items.Include(i=>i.Image).Include(c=>c.supplier).SingleOrDefaultAsync(m => m.Id == id);
             if (itemModel == null)
             {
                 return NotFound();
@@ -45,8 +45,10 @@ namespace GabyCarpenter.Controllers
         }
 
         // GET: Items/Create
-        public IActionResult Create()
+        public IActionResult 
+            Create()
         {
+            ViewBag.suppliers = _context.Supplier.Select(m => new SelectListItem() { Text = m.Name, Value = m.Id.ToString() });
             return View();
         }
 
@@ -55,11 +57,12 @@ namespace GabyCarpenter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Color,Depth,Description,Height,Name,Price,Width,amountInStock,tags")] ItemModel itemModel,[Bind("Image")] ICollection<IFormFile> Image)
+        public async Task<IActionResult> Create([Bind("Id,Color,Depth,Description,Height,Name,Price,Width,amountInStock,tags")] ItemModel itemModel,[Bind("Image")] ICollection<IFormFile> Image, int supplier)
         {
             if (ModelState.IsValid)
             {
                 saveImages(itemModel, Image);
+                itemModel.supplier = _context.Supplier.FirstOrDefault(m => m.Id == supplier);
                 _context.Add(itemModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -96,11 +99,12 @@ namespace GabyCarpenter.Controllers
                 return NotFound();
             }
 
-            var itemModel = await _context.Items.Include(i=>i.Image).SingleOrDefaultAsync(m => m.Id == id);
+            var itemModel = await _context.Items.Include(i=>i.Image).Include(k=>k.supplier).SingleOrDefaultAsync(m => m.Id == id);
             if (itemModel == null)
             {
                 return NotFound();
             }
+            ViewBag.suppliers = _context.Supplier.Select(m => new SelectListItem() { Text = m.Name, Value = m.Id.ToString(), Selected=m.Id == _context.Items.SingleOrDefault(o=>o.Id == id).supplier.Id}).ToList();
             return View(itemModel);
         }
 

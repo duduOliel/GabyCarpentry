@@ -1,0 +1,64 @@
+@model GabyCarpenter.Models.Carpentry.Supplier
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+<section>
+    <form asp-action="Create">
+        <div class="form-horizontal">
+            <h4>Supplier</h4>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactPersonName" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="ContactPersonName" class="form-control" />
+                    <span asp-validation-for="ContactPersonName" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PhoneNmber" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="PhoneNmber" class="form-control" />
+                    <span asp-validation-for="PhoneNmber" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -5,8 +5,9 @@
 }
 
 <section>
-    <h2>Order Details</h2>
+    <h2>Order Accepter</h2>
     <h4>Thank you for you order, we will contact you soon to complete payment issue</h4>
+    <h3>Your order Id: @Model.Id</h3>
     <div>
         @{await Html.RenderPartialAsync("FilteredItemView", Model.orderdItem);}
         <hr />
