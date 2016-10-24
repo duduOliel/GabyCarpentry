@@ -3,9 +3,10 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+@section header{
+    <h1>Order Accepted</h1>
+    }
 <section>
-    <h2>Order Accepter</h2>
     <h4>Thank you for you order, we will contact you soon to complete payment issue</h4>
     <h3>Your order Id: @Model.Id</h3>
     <div>
@@ -37,8 +38,5 @@
                 @Html.DisplayFor(model => model.status)
             </dd>
         </dl>
-    </div>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> 
     </div>
 </section>

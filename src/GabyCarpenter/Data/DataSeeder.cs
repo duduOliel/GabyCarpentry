@@ -6,26 +6,37 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
-using Microsoft.AspNet.Identity;
+using GabyCarpenter.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace GabyCarpenter.Data
 {
     public static class DataSeeder
     {
-        public static void SeedData(this IApplicationBuilder app)
+        public static readonly string ADMIN_USERNAME = "manager@gabycarpenter.com";
+        public static readonly string ADMIN_PASSWORD = "Password1!";
+
+        public static async void SeedData(this IApplicationBuilder app)
         {
+
             var db = (GabyCarpenterContext)app.ApplicationServices.GetService(typeof(GabyCarpenterContext));
-            
-            if(db.Supplier.FirstOrDefault(m => m.Name == "Maman") == null)
+            var _accountManager = (UserManager<ApplicationUser>)app.ApplicationServices.GetService(typeof(UserManager<ApplicationUser>));
+
+            if (await _accountManager.FindByEmailAsync(ADMIN_USERNAME) == null)
+            {
+                await _accountManager.CreateAsync(new ApplicationUser() { UserName = ADMIN_USERNAME, Email = ADMIN_USERNAME }, ADMIN_PASSWORD);
+            }
+
+
+            if (!db.Supplier.Any())
             {
                 db.Supplier.Add(new Supplier()
                 {
                     Name = "Maman",
-                    Address = "Rehovot",
-                    ContactPersonName="Yossi Maman",
-                    Email = "yossi@maman.co.il",
-                    PhoneNmber = "08-2236412"
+                    Address = "7 hayetzira st. Rehovot",
+                    ContactPersonName = "Meir Maman",
+                    Email = "sells@maman.co.il",
+                    PhoneNmber = "076-8019904"
                 });
 
                 db.Supplier.Add(new Supplier()
@@ -33,15 +44,15 @@ namespace GabyCarpenter.Data
                     Name = "Israely Wood Center",
                     Address = "Bilu center",
                     ContactPersonName = "Moshe",
-                    Email = "moshe@iwc.co.il",
-                    PhoneNmber = "08-8569543"
+                    Email = "info@woodcenter.co.il",
+                    PhoneNmber = "08-9495990"
                 });
 
                 db.Supplier.Add(new Supplier()
                 {
                     Name = "Tzdaka",
-                    Address = "Rehovot",
-                    ContactPersonName = "Yaakov Tzadka",
+                    Address = "6 Hamapuach st. Rehovot",
+                    ContactPersonName = "David Tzadka",
                     Email = "",
                     PhoneNmber = "08-9693145"
                 });
@@ -49,7 +60,7 @@ namespace GabyCarpenter.Data
 
             db.SaveChanges();
 
-            if (db.Items.FirstOrDefault(m => m.Name == "Pink Shelf") == null)
+            if (!db.Items.Any())
             {
                 db.Items.Add(new Models.Carpentry.ItemModel()
                 {
@@ -63,7 +74,7 @@ namespace GabyCarpenter.Data
                     amountInStock = 3,
                     tags = "Kitchen,Hangers,Shelf",
                     Image = createImage("001.jpg", "002.jpg", "003.jpg"),
-                    supplier = db.Supplier.FirstOrDefault(m=>m.Name== "Maman")
+                    supplier = db.Supplier.FirstOrDefault(m => m.Name == "Maman")
                 });
 
                 db.Items.Add(new Models.Carpentry.ItemModel()

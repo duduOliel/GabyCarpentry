@@ -5,19 +5,21 @@
 {
     <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-            </li>
+            <li><a asp-area="" asp-controller="Items" asp-action="Index">Items</a></li>
+            <li><a asp-area="" asp-controller="Orders" asp-action="Index">Orders</a></li>
+            <li><a asp-area="" asp-controller="Suppliers" asp-action="Index">Suppliers</a></li>
+            <li class="divider-vertical"></li>
+            <li><p class="navbar-text">Hello @UserManager.GetUserName(User).Split('@')[0] </p></li>
             <li>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button>
             </li>
+
         </ul>
     </form>
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
         <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
     </ul>
 }

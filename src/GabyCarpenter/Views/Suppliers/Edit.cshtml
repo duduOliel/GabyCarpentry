@@ -4,11 +4,12 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit</h2>
+@section header{
+    <h1>Edit Supplier</h1>
+}
 <section>
     <form asp-action="Edit">
         <div class="form-horizontal">
-            <h4>Supplier</h4>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />

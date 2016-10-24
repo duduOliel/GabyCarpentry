@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GabyCarpenter.Data;
 using GabyCarpenter.Models.Carpentry;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GabyCarpenter.Controllers
 {
+    [Authorize]
     public class SuppliersController : Controller
     {
         private readonly GabyCarpenterContext _context;

@@ -9,9 +9,11 @@ using GabyCarpenter.Data;
 using GabyCarpenter.Models.Carpentry;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GabyCarpenter.Controllers
 {
+    [Authorize]
     public class ItemsController : Controller
     {
         private readonly GabyCarpenterContext _context;

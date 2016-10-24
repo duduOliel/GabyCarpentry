@@ -3,12 +3,12 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h2>Create</h2>
+@section header{
+<h1>Create Supplier</h1>
+    }
 <section>
     <form asp-action="Create">
         <div class="form-horizontal">
-            <h4>Supplier</h4>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">

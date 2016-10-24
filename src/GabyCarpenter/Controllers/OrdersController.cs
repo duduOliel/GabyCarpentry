@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GabyCarpenter.Data;
 using GabyCarpenter.Models.Carpentry;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GabyCarpenter.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly GabyCarpenterContext _context;
@@ -26,6 +28,7 @@ namespace GabyCarpenter.Controllers
         }
 
         // GET: Orders/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,6 +46,7 @@ namespace GabyCarpenter.Controllers
         }
 
         // GET: Orders/Create
+        [AllowAnonymous]
         [Route("Orders/create/{itemId:int}")]
         public IActionResult Create(int itemId)
         {
@@ -53,6 +57,7 @@ namespace GabyCarpenter.Controllers
         // POST: Orders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Orders/create/{itemId:int}")]
