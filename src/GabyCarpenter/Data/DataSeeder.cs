@@ -169,16 +169,16 @@ namespace GabyCarpenter.Data
 
                 db.Items.Add(new Models.Carpentry.ItemModel()
                 {
-                    Name = "Kids boo",
+                    Name = "Stool",
                     Description = "Storage unit with 3 drawers and 1 door - openning upwards",
-                    Height = 40,
-                    Width = 60,
-                    Depth = 20,
-                    Color = "Purple",
+                    Height = 30,
+                    Width = 30,
+                    Depth = 40,
+                    Color = "Pink",
                     Price = 2500,
                     amountInStock = 1,
                     tags = "Storage,Drawers",
-                    Image = createImage("2234.jpg", "2235.jpg"),
+                    Image = createImage("IMG_2777 - Copy.jpg", "IMG_2778 - Copy.jpg", "IMG_2777 - Copy.jpg"),
                     supplier = db.Supplier.FirstOrDefault(m => m.Name == "Israely Wood Center")
                 });
 

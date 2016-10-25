@@ -7,10 +7,6 @@ using System.Threading.Tasks;
 namespace GabyCarpenter.Models.Carpentry
 {
 
-    public enum OrderStatus
-    {
-        New, Ready, Delivered
-    }
 
     public class OrderModel
     {
@@ -32,5 +28,9 @@ namespace GabyCarpenter.Models.Carpentry
         [Display(AutoGenerateField = false)]
         public OrderStatus status { get; set; }
 
+    }
+    public enum OrderStatus
+    {
+        New, Ready, Delivered
     }
 }

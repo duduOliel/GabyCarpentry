@@ -8,8 +8,8 @@ using GabyCarpenter.Data;
 namespace GabyCarpenter.Migrations
 {
     [DbContext(typeof(GabyCarpenterContext))]
-    [Migration("20161020211107_orders")]
-    partial class orders
+    [Migration("20161025215726_gabyInitial")]
+    partial class gabyInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
