@@ -43,3 +43,33 @@ function showResponse(json, statusText, xhr, $form) {
     });
 
 }
+
+    var map;
+$(document).ready(function () {
+    var elevator;
+    var myOptions = {
+        zoom: 8,
+        center: new google.maps.LatLng(32, 35),
+        mapTypeId: 'roadmap'
+    };
+    map = new google.maps.Map($('#map_canvas')[0], myOptions);
+
+    //var addresses = ['הרצל  26 ירושלים','אלנבי 55'];
+
+    //setMapMarkers(addresses);
+    
+});
+
+function setMapMarkers(addresses) {
+    for (var x = 0; x < addresses.length; x++) {
+        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addresses[x] + '&sensor=false', null, function (data) {
+            var p = data.results[0].geometry.location
+            var latlng = new google.maps.LatLng(p.lat, p.lng);
+            new google.maps.Marker({
+                position: latlng,
+                map: map
+            });
+
+        });
+    }
+}

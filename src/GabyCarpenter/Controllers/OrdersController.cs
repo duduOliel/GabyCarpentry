@@ -18,12 +18,16 @@ namespace GabyCarpenter.Controllers
 
         public OrdersController(GabyCarpenterContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: Orders
         public async Task<IActionResult> Index()
         {
+            ViewBag.addreess = _context.Orders
+                .Where(m => m.status == OrderStatus.Ready)
+                .Select(k => k.SheepingAddress)
+                .ToArray();
             return View(await _context.Orders.ToListAsync());
         }
 
@@ -36,7 +40,7 @@ namespace GabyCarpenter.Controllers
                 return NotFound();
             }
 
-            var orderModel = await _context.Orders.Include(p => p.orderdItem).ThenInclude(j=>j.Image).SingleOrDefaultAsync(m => m.Id == id);
+            var orderModel = await _context.Orders.Include(p => p.orderdItem).ThenInclude(j => j.Image).SingleOrDefaultAsync(m => m.Id == id);
             if (orderModel == null)
             {
                 return NotFound();
@@ -72,7 +76,7 @@ namespace GabyCarpenter.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Details/" + orderModel.Id);
             }
-            return RedirectToAction("index","Home",null);
+            return RedirectToAction("index", "Home", null);
         }
 
         // GET: Orders/Edit/5
@@ -157,6 +161,18 @@ namespace GabyCarpenter.Controllers
         private bool OrderModelExists(int id)
         {
             return _context.Orders.Any(e => e.Id == id);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Search(string orderId, string orderedItem, string name)
+        {
+            return View(await _context.Orders
+                .Include(l => l.orderdItem)
+                .Where(m => orderId != null ? m.Id == int.Parse(orderId) : true)
+                .Where(l => orderedItem != null ? l.orderdItem.Id == int.Parse(orderedItem) : true)
+                .Where(p => name != null ? p.clientName == name : true)
+                .ToListAsync());
         }
     }
 }

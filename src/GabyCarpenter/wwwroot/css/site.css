@@ -151,3 +151,8 @@ margin: 5px 9px;
 border-left: 1px solid #f2f2f2;
 border-right: 1px solid #ffffff;
 }
+
+#map_canvas {
+    width: 100%;
+    height: inherit;
+}
