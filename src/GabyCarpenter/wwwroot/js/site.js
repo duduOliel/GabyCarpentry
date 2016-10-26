@@ -13,7 +13,23 @@ $(document).ready(function () {
     $('#colors').change(function () { $("#searchForm").ajaxSubmit(options); });
     $('#inStock').change(function () { $("#searchForm").ajaxSubmit(options); });
     
-    $('#clearFilter').click(function () { $("#tags").val([]); $("#colors").val([]);$("#inStock").val(["yes","no"]);$("#searchForm").ajaxSubmit(options); });
+    $('#clearFilter').click(function () { $("#tags").val([]); $("#colors").val([]); $("#inStock").val(["yes", "no"]); $("#searchForm").ajaxSubmit(options); });
+
+    //popover
+    var addressesTds = $("[id^=address_div_]")
+    for (var index = 0 ; index < addressesTds.length ; ++index) {
+        var thing = addressesTds[index].id;
+        var address = $("#" + addressesTds[index].id).attr("data-address")
+        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&sensor=false', null, function (data) {
+            var p = data.results[0].geometry.location
+           
+            $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20item.condition.text%20from%20weather.forecast%20where%20woeid%20in%20(SELECT%20woeid%20FROM%20geo.places%20WHERE%20text%3D%22(" + p.lat + "%2C" + p.lng + ")%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys", null, function (data) {
+                
+                $("#" + thing).popover({ title: "Dear distributor", content: "Wheather in delivary area is: " + data.query.results.channel.item.condition.text, trigger: "hover" });
+               
+            });
+        });
+    };
 });
 
 // post-submit callback 
@@ -61,6 +77,9 @@ $(document).ready(function () {
 });
 
 function setMapMarkers(addresses) {
+    
+    var bounds = new google.maps.LatLngBounds();
+
     for (var x = 0; x < addresses.length; x++) {
         $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addresses[x] + '&sensor=false', null, function (data) {
             var p = data.results[0].geometry.location
@@ -69,7 +88,12 @@ function setMapMarkers(addresses) {
                 position: latlng,
                 map: map
             });
-
+            bounds.extend(latlng);
         });
     }
+    map.fitBounds(bounds);
+}
+
+function getWeather() {
+    return "cloudy";
 }

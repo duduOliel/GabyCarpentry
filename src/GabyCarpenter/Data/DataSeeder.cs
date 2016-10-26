@@ -16,9 +16,14 @@ namespace GabyCarpenter.Data
         public static readonly string ADMIN_USERNAME = "manager@gabycarpenter.com";
         public static readonly string ADMIN_PASSWORD = "Password1!";
 
+
         public static async void SeedData(this IApplicationBuilder app)
         {
 
+            string[] itemNames = { "Pink Shelf", "Kids Book shelf", "Small shelf","Diper chnager","Kitchen Cabinet","Living room deco shelfs", "Big storage unit", "Stool","Shoes sotring compartment","Book Shelf","Girls cabinet","Boys cabinet"};
+            String[] clientNames = { "Dudu Oliel", "Igor Rochlin", "Moshe abutbul", "Yosi Cohen", "Moti Gabay", "Yuri Portinsky", "Miki Ashkenazi", "Nama Aviv" };
+            string[] addresses = { "Naale", "1 Emek Ayalon, Modiin", "Addar 5, Modiin", "43 Hertzel, Rishon Letzion", "4 Alenby, Tel Aviv", "1 Haoreg, Modiin", "Haim Arlozorov, Petah TIkva", "Jaffa, Jerusalem" };
+            
             var db = (GabyCarpenterContext)app.ApplicationServices.GetService(typeof(GabyCarpenterContext));
             var _accountManager = (UserManager<ApplicationUser>)app.ApplicationServices.GetService(typeof(UserManager<ApplicationUser>));
 
@@ -247,6 +252,24 @@ namespace GabyCarpenter.Data
             //    .Select(d =>d.Entity.Name)
             //    .ToList()
             //    .ForEach(k => db.Items.RemoveRange(db.Items.Where(l => l.Name == k).ToList()));
+
+            db.SaveChanges();
+            Random rnd = new Random();
+
+            if (!db.Orders.Any())
+            {
+                foreach (string address in addresses)
+                {
+                    db.Orders.Add(new OrderModel()
+                    {
+                        orderdItem = db.Items.FirstOrDefault(m => m.Name.Equals(itemNames[rnd.Next(itemNames.Length)])),
+                        clientName = clientNames[rnd.Next(clientNames.Length)],
+                        phoneNumber = rnd.Next(999999999).ToString(),
+                        SheepingAddress = address,
+                        status = (OrderStatus)Enum.GetValues(typeof(OrderStatus)).GetValue(rnd.Next(3))
+                    });
+                }
+            }
 
             db.SaveChanges();
         }

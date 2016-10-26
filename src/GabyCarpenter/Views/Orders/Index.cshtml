@@ -8,6 +8,7 @@
     }
 
 <section>
+   jj: <p id="jj"></p>
     <h2>Search orders</h2>
     @*<div class="row">
         <form asp-action="search">
@@ -72,9 +73,10 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Id)
                     </td>
-                    <td>
+                    <td id="address_div_@item.Id" data-address="@item.SheepingAddress">
                         @Html.DisplayFor(modelItem => item.SheepingAddress)
                     </td>
+                    
                     <td>
                         @Html.DisplayFor(modelItem => item.clientName)
                     </td>
@@ -108,6 +110,6 @@
 
 
 @section aside{
-    <section><h2>Undelivered Orders/</h2></section>
+    <section><h2>Undelivered Orders</h2></section>
 <div id="map_canvas"></div>
 }
