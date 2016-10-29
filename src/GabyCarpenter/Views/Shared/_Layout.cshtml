@@ -46,7 +46,7 @@
     </div>
     <div class="container body-content">
         <header>
-            @RenderSection("header", required:false)
+            @RenderSection("header", required: false)
         </header>
         <div id="content">
             @RenderBody()
@@ -66,20 +66,13 @@
                 }
             </aside>
         </div>
-      
-        <script>
-            $(document).ready(function () {
-                $(aside).height($(content).height());
-            });
-        </script>
-
-            <hr />
-            <footer>
-                <p>&copy; 2016 - GabyCarpenter</p>
-            </footer>
+        <hr />
+        <footer>
+            <p>&copy; 2016 - GabyCarpenter</p>
+        </footer>
     </div>
 
-    
+
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"

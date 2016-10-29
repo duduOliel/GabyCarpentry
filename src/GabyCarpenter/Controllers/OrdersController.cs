@@ -24,6 +24,9 @@ namespace GabyCarpenter.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
+            
+            ViewBag.items = _context.Orders.Include(e => e.orderdItem).Select(l => l.orderdItem).Distinct().ToList().Select(m => new SelectListItem() { Text = m.Name, Value = m.Id.ToString() }).ToList<SelectListItem>();
+            ViewBag.items.Insert(0, new SelectListItem());
             ViewBag.addreess = _context.Orders
                 .Where(m => m.status == OrderStatus.Ready)
                 .Select(k => k.SheepingAddress)
@@ -165,13 +168,16 @@ namespace GabyCarpenter.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Search(string orderId, string orderedItem, string name)
+        public IActionResult Search(string orderId, string orderedItem, string name)
         {
-            ViewBag.addreess = _context.Orders
-                .Where(m => m.status == OrderStatus.Ready)
+            ViewBag.items = _context.Orders.Include(e => e.orderdItem).Select(l => l.orderdItem).ToList().Select(m => new SelectListItem() { Text = m.Name, Value = m.Id.ToString() }).ToList<SelectListItem>();
+            ViewBag.items.Insert(0, new SelectListItem());
+
+            ViewBag.addreess = _context.Orders.Include(x=>x.orderdItem)
+                .Where(m => m.status == OrderStatus.Ready).ToList()
                 .Where(s => orderId != null ? s.Id == int.Parse(orderId) : true)
                 .Where(l => orderedItem != null ? l.orderdItem.Id == int.Parse(orderedItem) : true)
-                .Where(p => name != null ? p.clientName == name : true)
+                .Where(p => name != null ? p.clientName.ToLower().Contains(name.ToLower()) : true)
                 .Select(k => k.SheepingAddress)
                 .ToArray();
 
@@ -179,7 +185,7 @@ namespace GabyCarpenter.Controllers
                 .Include(l => l.orderdItem).ToList()
                 .Where(m => orderId != null ? m.Id == int.Parse(orderId) : true)
                 .Where(l => orderedItem != null ? l.orderdItem.Id == int.Parse(orderedItem) : true)
-                .Where(p => name != null ? p.clientName == name : true));
+                .Where(p => name != null ? p.clientName.ToLower().Contains(name.ToLower()) : true));
         }
     }
 }

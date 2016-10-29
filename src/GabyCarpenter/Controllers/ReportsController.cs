@@ -26,7 +26,11 @@ namespace GabyCarpenter.Controllers
         public IActionResult OrdersByItems()
         {
             return View(new OrdersByItems() {
-            data = _context.Orders.Include(e => e.orderdItem).GroupBy(m => m.orderdItem).Select(s => new { key = s.FirstOrDefault().orderdItem.Name, value = s.ToList() }).ToDictionary(l => l.key, p => p.value)
+            data = _context.Orders
+                        .Include(e => e.orderdItem)
+                        .GroupBy(m => m.orderdItem)
+                        .Select(s => new { key = s.FirstOrDefault().orderdItem.Name, value = s.ToList() })
+                        .ToDictionary(l => l.key, p => p.value)
         });
         }
     }

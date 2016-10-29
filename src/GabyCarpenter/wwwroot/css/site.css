@@ -1,58 +1,67 @@
 ﻿@font-face {
-   font-family: woodFont;
-   src: url(../fonts/MISTV___.TTF);
+    font-family: woodFont;
+    src: url(../fonts/MISTV___.TTF);
 }
+
 header h1 {
-     font-family: woodFont;
-    text-shadow:5px 5px 2px #808080;
+    font-family: woodFont;
+    text-shadow: 5px 5px 2px #808080;
 }
-h2{
-    font-family:fantasy;
+
+h2 {
+    font-family: fantasy;
 }
+
 header {
     #position:relative;
     #top:50px;
-    margin-top:55px;
+    margin-top: 55px;
 }
 
 div#content {
-    position:relative;
-    #   width:80%;
+    position: relative;
+    # width:80%;
 }
+
 aside {
     position: absolute;
-    top:0px;
-    width:19.5%;
-    height:300px;
-    right:0;
-    margin-left:8px;
-    
-    border-radius:8px 8px;
-
+    top: 0px;
+    width: 19.5%;
+    height: 100%;
+    min-height: 300px;
+    right: 0;
+    margin-left: 8px;
+    border-radius: 8px 8px;
     background: -webkit-linear-gradient(#80c1ff, #ebebeb); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#80c1ff, #ebebeb); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#80c1ff, #ebebeb); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#80c1ff, #ebebeb); /* Standard syntax */
-    
 }
 
-div#content > section{
-    background-color:blue;
-    width: 80%;
-    margin-bottom:10px;
-    margin-top:10px;
-    min-height:170px;
+#ordersAsideHeader {
+    height: 15%;
+}
 
+div#content > section {
+    background-color: blue;
+    width: 80%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    min-height: 170px;
     background: -webkit-linear-gradient(#4faff7, #ebebeb); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#4faff7, #ebebeb); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#4faff7, #ebebeb); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#4faff7, #ebebeb); /* Standard syntax */
 }
 
-section { 
-    padding:10px;
-    border-radius:8px 8px;
+section {
+    padding: 10px;
+    border-radius: 8px 8px;
 }
+
+    section video {
+        width: 100%;
+    }
 
 
 /* Wrapping element */
@@ -76,83 +85,86 @@ textarea {
 
 /* buttons and links extension to use brackets: [ click me ] */
 .btn-bracketed::before {
-    display:inline-block;
+    display: inline-block;
     content: "[";
     padding-right: 0.5em;
 }
+
 .btn-bracketed::after {
-    display:inline-block;
+    display: inline-block;
     content: "]";
     padding-left: 0.5em;
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"]
-{
+.carousel-inner .item img[src$=".svg"] {
     width: 100%;
 }
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
-  /* Hide captions */
-  .carousel-caption {
-    display: none
-  }
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
 }
 
-img.detailsImageThambnail{
-    height : 40px;
-    width : 40px;
+img.detailsImageThambnail {
+    height: 40px;
+    width: 40px;
 }
 
-img.filteredImageFixedSize{
+img.filteredImageFixedSize {
     height: 120px !important;
     width: 120px !important;
 }
 
-div.editImage{
-    float:left;
-    position:relative;
-    height:120px;
-    width:120px;
-    margin-left:7px;
+div.editImage {
+    float: left;
+    position: relative;
+    height: 120px;
+    width: 120px;
+    margin-left: 7px;
 }
 
-div.editImage img{
-    position:absolute;
-    float:left;
-    height:120px;
-    width:120px;
-}
+    div.editImage img {
+        position: absolute;
+        float: left;
+        height: 120px;
+        width: 120px;
+    }
 
-div.editImage:hover img{
-    opacity:0.5;
-}
+    div.editImage:hover img {
+        opacity: 0.5;
+    }
 
-div.editImage img.deleteButton{
-    position:relative;
-    height : 25px;
-    width : 25px;
-    display:none;
-}
+    div.editImage img.deleteButton {
+        position: relative;
+        height: 25px;
+        width: 25px;
+        display: none;
+    }
 
-div.editImage:hover img.deleteButton{
-    display:block;
-    opacity:inherit;
-}
+    div.editImage:hover img.deleteButton {
+        display: block;
+        opacity: inherit;
+    }
 
-#filters select{
-    width:200px;
+#filters select {
+    width: 200px;
 }
 
 .navbar .divider-vertical {
-height: 40px;
-margin: 5px 9px;
-border-left: 1px solid #f2f2f2;
-border-right: 1px solid #ffffff;
+    height: 40px;
+    margin: 5px 9px;
+    border-left: 1px solid #f2f2f2;
+    border-right: 1px solid #ffffff;
 }
 
 #map_canvas {
     width: 100%;
-    height: inherit;
+    height: 85%;
+}
+#orderedItem{
+    width:280px;
 }
