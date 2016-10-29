@@ -12,7 +12,7 @@ $(document).ready(function () {
     $('#tags').change(function () { $("#searchForm").ajaxSubmit(options); });
     $('#colors').change(function () { $("#searchForm").ajaxSubmit(options); });
     $('#inStock').change(function () { $("#searchForm").ajaxSubmit(options); });
-    
+
     $('#clearFilter').click(function () { $("#tags").val([]); $("#colors").val([]); $("#inStock").val(["yes", "no"]); $("#searchForm").ajaxSubmit(options); });
 
     //popover
@@ -35,8 +35,8 @@ $(document).ready(function () {
             });
         })
     }, 100);
-    
-   
+
+
 
     $.ajaxSetup({
         async: true
@@ -49,7 +49,7 @@ function showResponse(json, statusText, xhr, $form) {
     $("[id^=item_]").hide();
 
     // display those returned from search
-    json.items.forEach(function(id){
+    json.items.forEach(function (id) {
         $("#item_" + id).show();
     });
 
@@ -71,9 +71,9 @@ function showResponse(json, statusText, xhr, $form) {
 
 }
 
-    var map;
+var map;
 $(document).ready(function () {
-   
+
     var elevator;
     var myOptions = {
         zoom: 8,
@@ -82,11 +82,11 @@ $(document).ready(function () {
     };
     map = new google.maps.Map($('#map_canvas')[0], myOptions);
     //setMapMarkers(addresses);
-    
+
 });
 
 function setMapMarkers(addresses) {
-    
+
     var bounds = new google.maps.LatLngBounds();
 
     for (var x = 0; x < addresses.length; x++) {

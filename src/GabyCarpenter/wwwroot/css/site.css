@@ -6,7 +6,12 @@
 header h1 {
     font-family: woodFont;
     text-shadow: 5px 5px 2px #808080;
+    transition: all 0.3s ease;
 }
+
+    header h1:hover {
+        font-size: 42px;
+    }
 
 h2 {
     font-family: fantasy;
@@ -165,6 +170,14 @@ div.editImage {
     width: 100%;
     height: 85%;
 }
-#orderedItem{
-    width:280px;
+
+#orderedItem {
+    width: 280px;
+}
+
+.aboutCol {
+    width: 80%;
+    -webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
 }
