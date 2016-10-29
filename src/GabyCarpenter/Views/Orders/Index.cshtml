@@ -8,9 +8,8 @@
     }
 
 <section>
-   jj: <p id="jj"></p>
     <h2>Search orders</h2>
-    @*<div class="row">
+    <div class="row">
         <form asp-action="search">
             <div class="form-group">
                 <label for="orderId" class="col-md-2 control-label">Order Id</label>
@@ -38,7 +37,7 @@
             
         </form>
 
-    </div>*@
+    </div>
 </section>
 <section>
 
@@ -73,7 +72,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Id)
                     </td>
-                    <td id="address_div_@item.Id" data-address="@item.SheepingAddress">
+                    <td id="address_td_@item.Id" data-address="@item.SheepingAddress">
                         @Html.DisplayFor(modelItem => item.SheepingAddress)
                     </td>
                     
@@ -104,7 +103,9 @@
             
     }
     $(document).ready(function () {
+       
         setMapMarkers(addresses);
+        
     })
 </script>
 

@@ -1,0 +1,70 @@
+﻿@model GabyCarpenter.Models.Carpentry.viewModel.OrdersByItems
+
+@section header {
+    <h1>Orders by City</h1>
+}
+
+@foreach (KeyValuePair<string, List<GabyCarpenter.Models.Carpentry.OrderModel>> element in Model.data)
+{
+    <section>
+        <div class="row">
+            <h2 class="col-xs-4">@element.Key</h2>
+            <div class="col-xs-6"><h3> Orders amount: @element.Value.Count()</h3></div>
+            <div class="col-xs-2">
+                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#div_@element.Key.Replace(" ","")">Show/Hide</button>
+            </div>
+            <div id="div_@element.Key.Replace(" ","")" class="collapse">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Order #
+                            </th>
+                            <th>
+                                Address
+                            </th>
+                            <th>
+                                Client Name
+                            </th>
+                            <th>
+                                Phone Number
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in element.Value)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+                                <td id="address_td_@item.Id" data-address="@item.SheepingAddress">
+                                    @Html.DisplayFor(modelItem => item.SheepingAddress)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.clientName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.phoneNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.status)
+                                </td>
+                                <td>
+                                    <a asp-controller="Orders" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                    <a asp-controller="Orders" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                    <a asp-controller="Orders" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+}

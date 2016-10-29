@@ -260,9 +260,11 @@ namespace GabyCarpenter.Data
             {
                 foreach (string address in addresses)
                 {
+                    var nameToSearch = itemNames[rnd.Next(itemNames.Length)];
+                    var orderedItem = db.Items.FirstOrDefault(m => m.Name.Equals(nameToSearch));
                     db.Orders.Add(new OrderModel()
                     {
-                        orderdItem = db.Items.FirstOrDefault(m => m.Name.Equals(itemNames[rnd.Next(itemNames.Length)])),
+                        orderdItem = orderedItem, 
                         clientName = clientNames[rnd.Next(clientNames.Length)],
                         phoneNumber = rnd.Next(999999999).ToString(),
                         SheepingAddress = address,

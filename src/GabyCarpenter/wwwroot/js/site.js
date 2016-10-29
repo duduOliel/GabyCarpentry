@@ -16,20 +16,31 @@ $(document).ready(function () {
     $('#clearFilter').click(function () { $("#tags").val([]); $("#colors").val([]); $("#inStock").val(["yes", "no"]); $("#searchForm").ajaxSubmit(options); });
 
     //popover
-    var addressesTds = $("[id^=address_div_]")
-    for (var index = 0 ; index < addressesTds.length ; ++index) {
-        var thing = addressesTds[index].id;
-        var address = $("#" + addressesTds[index].id).attr("data-address")
-        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&sensor=false', null, function (data) {
-            var p = data.results[0].geometry.location
-           
-            $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(SELECT%20woeid%20FROM%20geo.places%20WHERE%20text%3D%22(" + p.lat + "%2C" + p.lng + ")%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys", null, function (data) {
-                
-                $("#" + thing).popover({ title: "Dear distributor", content: "Wheather in delivary area is: " + data.query.results.channel.item.condition.text + "\n(" + data.query.results.channel.item.title +")", trigger: "hover" });
-               
+    setTimeout(function () {
+        var addressesTds = $("[id^=address_td_]");
+        addressesTds.each(function () {
+            var thing = this.id;
+            var address = $("#" + this.id).attr("data-address")
+            $.ajaxSetup({
+                async: false
             });
-        });
-    };
+            $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&sensor=false', null, function (data) {
+                var p = data.results[0].geometry.location
+
+                $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(SELECT%20woeid%20FROM%20geo.places%20WHERE%20text%3D%22(" + p.lat + "%2C" + p.lng + ")%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys", null, function (data) {
+
+                    $("#" + thing).popover({ title: "Dear distributor", content: "Wheather in delivary area is: " + data.query.results.channel.item.condition.text + "\n(" + data.query.results.channel.item.title + ")", trigger: "hover" });
+
+                });
+            });
+        })
+    }, 100);
+    
+   
+
+    $.ajaxSetup({
+        async: true
+    });
 });
 
 // post-submit callback 
@@ -62,6 +73,7 @@ function showResponse(json, statusText, xhr, $form) {
 
     var map;
 $(document).ready(function () {
+   
     var elevator;
     var myOptions = {
         zoom: 8,
@@ -69,9 +81,6 @@ $(document).ready(function () {
         mapTypeId: 'roadmap'
     };
     map = new google.maps.Map($('#map_canvas')[0], myOptions);
-
-    //var addresses = ['הרצל  26 ירושלים','אלנבי 55'];
-
     //setMapMarkers(addresses);
     
 });

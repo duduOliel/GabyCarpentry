@@ -167,12 +167,19 @@ namespace GabyCarpenter.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Search(string orderId, string orderedItem, string name)
         {
-            return View(await _context.Orders
-                .Include(l => l.orderdItem)
-                .Where(m => orderId != null ? m.Id == int.Parse(orderId) : true)
+            ViewBag.addreess = _context.Orders
+                .Where(m => m.status == OrderStatus.Ready)
+                .Where(s => orderId != null ? s.Id == int.Parse(orderId) : true)
                 .Where(l => orderedItem != null ? l.orderdItem.Id == int.Parse(orderedItem) : true)
                 .Where(p => name != null ? p.clientName == name : true)
-                .ToListAsync());
+                .Select(k => k.SheepingAddress)
+                .ToArray();
+
+            return View("index",  _context.Orders
+                .Include(l => l.orderdItem).ToList()
+                .Where(m => orderId != null ? m.Id == int.Parse(orderId) : true)
+                .Where(l => orderedItem != null ? l.orderdItem.Id == int.Parse(orderedItem) : true)
+                .Where(p => name != null ? p.clientName == name : true));
         }
     }
 }
